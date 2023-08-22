@@ -37,7 +37,7 @@ jobs:
       - name: Push
         uses: crazy-max/ghaction-github-pages@v3
         with:
-          target_branch: resource/grs # May change to your desired branch name, the final URL need to be updated if you change this
+          target_branch: main # May change to your desired branch name, the final URL need to be updated if you change this
           build_dir: raw/resource/grs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
