@@ -1,0 +1,46 @@
+name: GRS Download
+
+on:
+  workflow_dispatch:
+  push:
+  schedule:
+    - cron: 0 */2 * * *
+
+jobs:
+  top-langs:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    name: Top-langs Card
+    steps:
+      - uses: actions/checkout@v3
+        name: Check out current commit
+
+      - uses: suisei-cn/actions-download-file@v1.3.0
+        id: stats
+        name: Download the top-langs file
+        with:
+          url: "https://github-readme-stats-jzw5fm9zz-nworb9.vercel.app/api/top-langs/?username=nworb9&langs_count=6&layout=compact&theme=transparent"
+          target: grs
+          filename: top-langs.svg
+      - uses: actions/upload-artifact@master
+        with:
+          name: top-langs
+          path: grs
+
+  push:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    name: Push
+    needs: [top-langs]
+    steps:
+      - uses: actions/download-artifact@master
+        with:
+          name: top-langs
+          path: grs
+      - name: Push
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: resource/grs
+          build_dir: grs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
