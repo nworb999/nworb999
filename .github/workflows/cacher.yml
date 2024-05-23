@@ -19,7 +19,7 @@ jobs:
         id: stats
         name: Download the top-langs file
         with:
-          url: "https://github-readme-stats-gznaan8jo-nworb999.vercel.app/api/top-langs/?username=nworb999&langs_count=8&layout=compact&theme=transparent"
+          url: "https://github-readme-stats-gznaan8jo-nworb999.vercel.app/api/top-langs/?username=nworb999&langs_count=8&layout=compact&theme=transparent&hide=gcode"
           target: grs
           filename: top-langs.svg
       - uses: actions/upload-artifact@master
